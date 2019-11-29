@@ -28,7 +28,7 @@ public class Algorithm extends UnicastRemoteObject implements IRating {
 
 		// TODO realizar teste distribuido
 //        Classes classes = serverData.getClasses().get(0);
-//        System.out.println("class: " + classes.toString());
+        System.out.println("Processando...");
 		List<DTORating> dtoRatings = new ArrayList<>();
 		int count = 0;
 		for (Chromosome chromosome : serverData.getChromosomes()) {
@@ -47,8 +47,9 @@ public class Algorithm extends UnicastRemoteObject implements IRating {
 
 			dtoRatings.add(new DTORating(chromosome, count));
 			count++;
+			System.out.println("Finalizando....");
 		}
-		return null;
+		return dtoRatings;
 	}
 
 	private int scheduleConflict(Chromosome chromosome, int avaliation, DTOServerData serverData) {
@@ -88,6 +89,7 @@ public class Algorithm extends UnicastRemoteObject implements IRating {
 		for (int i = 0; i < serverData.getClasses().size(); i++) {
 			Lesson lesson = serverData.getLessons().get(i);
 			int idClass = lesson.getClassesId();
+			int countWhile = 0;
 			while (idClass == currentClassId) {
 				int idSubject = lesson.getSubjectId();
 				int qtdPerWeek = lesson.getPeriodsPerWeek();
@@ -101,7 +103,8 @@ public class Algorithm extends UnicastRemoteObject implements IRating {
 				if (qtdPerWeek > 0) {
 					avaliation += 30 * qtdPerWeek;
 				}
-				currentClassId = serverData.getLessons().get(i + 1).getClassesId();
+				currentClassId = serverData.getLessons().get(countWhile + 1).getClassesId();
+				countWhile++;
 			}
 		}
 		return avaliation;

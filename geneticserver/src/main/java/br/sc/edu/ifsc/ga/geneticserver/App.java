@@ -22,8 +22,8 @@ public class App {
 
 			IRating rating = new Algorithm();
 
-			System.setProperty("java.rmi.server.hostname", "127.0.0.1");
-			LocateRegistry.createRegistry(1099);
+			//System.setProperty("java.rmi.server.hostname", "127.0.0.1");
+			//LocateRegistry.createRegistry(1099);
 
 			System.out.println("\n\tRegistrando objeto no RMIRegistry");
 			Naming.rebind("rmi://127.0.0.1:1099/Evaluation", rating);
