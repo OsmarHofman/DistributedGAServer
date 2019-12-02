@@ -42,13 +42,17 @@ public class Algorithm extends UnicastRemoteObject implements IRating {
 
 			// Demérito: Turma sem alguma disciplina -30
 			avaliation = subjectlessClass(chromosome, avaliation, serverData);
-
+			
+			if(chromosome.getAvaliation() == 0) {
+				chromosome.setAvaliation(5000);
+			}
 			chromosome.setAvaliation(chromosome.getAvaliation() - avaliation);
 
 			dtoRatings.add(new DTORating(chromosome, count));
 			count++;
-			System.out.println("Finalizando....");
 		}
+		System.out.println("Finalizando....");
+
 		return dtoRatings;
 	}
 
